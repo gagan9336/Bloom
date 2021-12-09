@@ -112,22 +112,36 @@ cloudinary.config({
             return res.redirect('back');
         }
     geocoder.geocode(req.body.location, (err, data) => {
-
-                var lat = data[0].latitude;
-                var lng = data[0].longitude;
-                var location = data[0].formattedAddress;
-
-                var newcampGround = {
-                name: name,
-                image: result.secure_url,
-                image_id: result.public_id,
-                description: description,
-                categories: categories,
-                author: author,
-                location: location,
-                lat: lat,
-                lng: lng
-            }
+                if(err || !data.length) {
+                    var newcampGround = {
+                        name: name,
+                        image: result.secure_url,
+                        image_id: result.public_id,
+                        description: description,
+                        categories: categories,
+                        author: author,
+                        location: location,
+                        lat: lat,
+                        lng: lng
+                    }      
+                } else {
+                    var lat = data[0].latitude;
+                    var lng = data[0].longitude;
+                    var location = data[0].formattedAddress;
+    
+                    var newcampGround = {
+                    name: name,
+                    image: result.secure_url,
+                    image_id: result.public_id,
+                    description: description,
+                    categories: categories,
+                    author: author,
+                    location: location,
+                    lat: lat,
+                    lng: lng
+                }
+                }
+                
             // create a new campground an save in the database
             Campground.create(newcampGround, (err, newlyCreated) => {
                 if (err) {

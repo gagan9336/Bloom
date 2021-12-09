@@ -5,9 +5,22 @@
     <div class="row">
 
         <!-- For map -->
-        <div class="col-md-5">
-            <div id="map"></div>
-        </div>
+        <% if(campground.lat == null) {%>
+            <div class="col-md-5 d-none d-sm-none d-md-block">
+                <div id="map-no">
+                    <img style="width: 100%;
+                    height: 100%; 
+                    border-radius: 5px;
+                    opacity: 40%;
+                    object-fit: contain;"src="../Stylesheets/together.jpg" alt="">
+                </div>
+            </div>
+            <%} else {%>
+            <div class="col-md-5">
+                <div id="map"></div>
+            </div>
+            <%}%>
+        
 
         <!-- For detailed post -->
         <div class="col-md-7">
@@ -120,11 +133,16 @@ function initMap() {
     var lat = <%=campground.lat%>;
     var lng = <%=campground.lng%>;
     var center = { lat: lat, lng: lng };
-    var map = new google.maps.Map(document.getElementById('map'), {
+    if(lat == "" && lng == "") {
+        console.log("No")
+    } else {
+        var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 6,
         center: center,
         scrollwheel: false
     });
+    }
+    
     var contentString = `
     <strong><%= campground.name %><br />
     <%= campground.location %></strong>
