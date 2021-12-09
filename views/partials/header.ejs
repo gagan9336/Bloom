@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloomera</title>
+  <link rel="shortcut icon" href="/stylesheets/BL-logo2.jpg" type="image/pngx-icon">
+
+  <!-- font stylesheet -->
+  <link href="/your-path-to-fontawesome/css/fontawesome.css">
+  <link href="/your-path-to-fontawesome/css/brands.css">
+  <link href="/your-path-to-fontawesome/css/solid.css">
+  <script src="https://kit.fontawesome.com/1a5f7041d2.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Akronim&family=Elsie+Swash+Caps&family=Fredericka+the+Great&family=Grey+Qo&family=Limelight&family=Ruthie&family=Rye&display=swap" rel="stylesheet">
+  <!-- bootstrap stylesheet -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+  <!-- Google Maps API -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+  <!-- custom css stylesheet -->
+  <link rel="stylesheet" href="/stylesheets/main.css">
+  <link rel="stylesheet" href="/stylesheets/loader.css">
+
+  <!-- JavaScript -->
+  <!-- Script for diabling button -->
+  <script>
+    function disableButton() {
+      var btn = document.getElementById('btn');
+      btn.disabled = true;
+      btn.innerText = 'Loading...'
+    }
+    function disableButton1() {
+        var btn = document.getElementById('btn1');
+        btn.disabled = true;
+        btn.innerText = 'Loading...'
+    }
+  </script>
+<!-- Main css file[duplicate] -->
+  <style>
+    .thumbnail img{
+    width:100%;
+    }
+    .thumbnail{
+        padding:0;
+    }
+    .thumbnail .caption-full{
+        padding:9px;
+    }
+    .pull-right h4{
+        margin: auto auto;
+    }
+
+    .space {
+        padding-top: auto !important;
+    }
+    /* body{
+        background-image: url(RedSunset.jpg);
+    } */
+
+    /* nav{
+        background-image: url(BrokenHearts.jpg);
+    } */
+    #black{
+        background-color:black;
+    }
+    #highlight{
+        background-color: rgb(230, 230, 230);
+    }
+
+    .big-search-1 {
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+    .big-button-1 {
+        border-radius: 15px;
+        padding: 10px;
+        margin-top: 5px;
+    }
+
+    .styled-form {
+        margin: center;
+    }
+
+    .margin-show-div {
+        margin-bottom: 15px;
+    }
+
+    /* Mapbox Maps */
+    #map {
+        height: 400px;
+        width: 100%;
+        margin-bottom: 10px;
+        border: 1px solid black;
+    }
+
+    .neonText {
+  color: #000000;
+  text-shadow:
+      0 0 7px #ffffff,
+      0 0 130px #ffffff;
+}
+  </style>
+<!-- Loader css file [duplicate] -->
+  <style>
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+  }
+  .loader-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .loader {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border: 4px solid black;
+    animation: loader 3s infinite ease;
+  }
+  .loader-inner {
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    background-color: grey;
+    animation: loader-inner 2s infinite ease-in;
+  }
+
+  @keyframes loader {
+    0% { transform: rotate(0deg);}
+    25% { transform: rotate(180deg);}
+    50% { transform: rotate(180deg);}
+    75% { transform: rotate(360deg);}
+    100% { transform: rotate(360deg);}
+  }
+
+  @keyframes loader-inner {
+    0% { height: 0%;}
+    25% { height: 0%;}
+    50% { height: 100%;}
+    75% { height: 100%;}
+    100% { height: 0%;}
+  }
+  .scoll-pane {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    outline: none;
+    overflow-y: hidden;
+    padding-bottom: 15px;
+    -ms-overflow-style: scroll;  
+    scrollbar-width: none;  
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+  .scoll-pane::-webkit-scrollbar { 
+  display: none;  
+  }
+
+  /* -------- */
+
+/* .blog-posts{
+  width: min(1200px, 100%);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.post{
+  width: calc(33% - 10px);
+  overflow: hidden;
+}
+
+.post-img{
+  width: 100%;
+  transition: .3s linear;
+  transition: transform .3s;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.3);
+
+}
+
+.post-content{
+  background-color: #ffffff;
+  margin: 0 20px 0 0px;
+  padding: 30px;
+  transform: translateY(-40px);
+  transition: .3s linear;
+}
+
+.post-content h3{
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.date{
+  font-size: 15px;
+  font-style: italic;
+  color: #e77f67;
+}
+
+.post:hover .post-img {
+  transform: scale(1.1);
+}
+
+
+/* .post:hover .post-content{
+  transform: translateY(-30px);
+} */
+
+/* @media screen and (max-width: 1200px){
+  .blog-posts{
+    justify-content: center;
+  }
+  .post{
+    width: min(600px, 100%);
+  }
+} */
+
+/* ---------------- */
+/* 
+.section-gray {
+    background: #E5E5E5;
+    padding: 60px 0 30px 0;
+}
+.card {
+    padding: 0%;
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.87);
+    background: #4e4e50;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+
+.card .card-image {
+    height: 60%;
+    position: relative;
+    overflow: hidden;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: -30px;
+    border-radius: 6px;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.card .card-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.card .card-image .card-caption {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #fff;
+    font-size: 1.3em;
+    text-shadow: 0 2px 5px rgba(33, 33, 33, 0.5);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+.table {
+    margin-bottom: 0px;
+}
+
+.card .table {
+    padding: 15px 30px;
+}
+
+.card-blog {
+    margin-top: 30px;
+}
+
+.card-blog .card-caption {
+    margin-top: 5px;
+}
+.card .author .avatar {
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.card .author a {
+    color: #333;
+    text-decoration: none;
+}
+.card-description p {
+    color: #888;
+}
+
+.table p {
+  color: #ff4363;
+}
+
+.card-caption,
+.card-caption a {
+    color: #950740;
+    text-decoration: none;
+}
+
+.card-caption {
+    font-weight: 700;
+    font-family: "Roboto Slab", "Times New Roman", serif;
+}
+
+.card .ftr {
+    margin-top: 15px;
+}
+
+.card .ftr div {
+    display: inline-block;
+}
+
+.card .ftr .author {
+    color: #888;
+}
+
+.card__date {
+  background: #dd4002;
+  color: #fff;
+  font-size: 14px;
+  padding: 15px 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 15px;
+  font-weight: bold;
+}
+
+body {
+  background-color: #1A1A1D;
+} */ */
+
+img:hover {
+  transform: scale(1.1) !important;
+}
+
+@media (min-width: 992px )  {
+  .card-columns {
+    -webkit-column-count: 3 !important;
+    -moz-column-count: 3 !important;
+    column-count: 3 !important;
+    -webkit-column-gap: 1.25rem !important;
+    -moz-column-gap: 1.25rem !important;
+    column-gap: 1.25rem !important;
+    orphans: 1 !important;
+    widows: 1 !important;
+  }
+}
+@media (max-width: 991px) and (min-width: 576px ) {
+  .card-columns {
+    -webkit-column-count: 2 !important;
+    -moz-column-count: 2 !important;
+    column-count: 2 !important;
+    -webkit-column-gap: 1.25rem !important;
+    -moz-column-gap: 1.25rem !important;
+    column-gap: 1.25rem !important;
+    orphans: 1 !important;
+    widows: 1 !important;
+  }
+}
+
+.animated {
+  animation-duration: 3s;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+  animation-delay: 1s;
+}
+
+@keyframes flip {
+  50% {transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);animation-timing-function: ease-in;}
+  80% {transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);animation-timing-function: ease-in;}
+  100% {transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);animation-timing-function: ease-in;}
+}
+.animated.flip {
+  backface-visibility: visible;
+  animation-name: flip;
+  font-size: 30px;
+  font-weight: 500;
+  text-align: center;
+  font-family:monospace ;
+}
+
+</style>
+<script>
+  var myArray = [ 'YLOOM' ];
+var n = 1;
+setInterval(function(){ 
+   $(".flip").html(myArray[n]);
+   if(myArray.length-1 == n){
+     n = 0;
+   }else{
+      n++;
+   }
+}, 5000);
+
+</script>
+
+ 
+</head>
+
+<body>
+
+  <!-- Nav Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container">
+      <!-- For page loading animation -->
+      <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+      </div>    
+        
+      <a class="navbar-brand neonText animated flip " href="/campGround">
+        <!-- <span style="font-family: Tangerine, cursive, sans-serif;
+       font-size: 45px; font-weight: 800; line-height:30px; color: #c3073f">Bloomera</span> -->
+       <!-- <img src="Stylesheets/logo_size.jpg" alt=""> -->
+          <span style="font-family: 'Elsie Swash Caps', cursive; font-weight: 600;">YLOOM</span>
+       </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="font-size: 20px; line-height:30px" data-toggle="modal" data-target="#exampleModal"><strong>Categories</strong><span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/campGround" method="GET" onsubmit='disableButton()'>
+          <input class="form-control mr-sm-2" type="text" name="search"
+          placeholder="Search posts..." aria-label="Search" style="width: 80%; margin-right: 15px;">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> </button>
+        </form>
+        <ul class="navbar-nav ml-auto">
+          <% if(!currentUser){ %>
+            <li class="nav-item">
+              <a class="nav-link" href="/login"><strong>Login</strong><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register"><strong>Register</strong></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/feedback"><strong>Feedback</strong><span class="sr-only">(current)</span></a>
+            </li>
+            <% }else{ %>
+              <li class="nav-item">
+                <a class="nav-link" href="/campGround/new"><i class="fas fa-plus-square"></i> <strong>New Post</strong></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fa fa-user-circle" aria-hidden="true"></i>
+                  <strong><%= currentUser.username%></strong>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"><strong>Logout</strong></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feedback"><strong>Feedback</strong><span class="sr-only">(current)</span></a>
+              </li>
+          <% } %> 
+        </ul>
+        </div>
+
+        
+
+    </div>
+  </nav>
+
+  <!-- Flash Messages -->
+  <div class="container" style="margin-top: 10px;">
+    <% if(error && error.length> 0){ %>
+      <div class="alert alert-danger" role="alert">
+        <%=error%>
+      </div>
+    <% } %>
+    <% if(success && success.length> 0){ %>
+      <div class="alert alert-success" role="alert">
+        <%=success%>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px; line-height:30px"><strong>Categories</strong></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+            <div class="form-group  mb-3">
+              <input class="btn btn-primary my-1 form-control" type="submit" name="category"
+                value="Entertainment">
+            </div>
+          </form>
+          <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+            <div class="form-group  mb-3">
+              <input class="btn btn-secondary my-1 form-control" type="submit" name="category"
+                value="Sports">
+            </div>
+          </form>
+          <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+            <div class="form-group  mb-3">
+              <input class="btn btn-danger my-1 form-control" type="submit" name="category"
+                value="Technology">
+            </div>
+          </form>
+          <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+            <div class="form-group  mb-3">
+              <input class="btn btn-warning form-control" type="submit" name="category"
+                value="Memories">
+            </div>
+          </form>
+          <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+            <div class="form-group  mb-3">
+              <input class="btn btn-info form-control" type="submit" name="category"
+                value="Food">
+            </div>
+          </form>
+          <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+            <div class="form-group  mb-3">
+              <input class="btn btn-light form-control" type="submit" name="category"
+                value="News">
+            </div>
+          </form>
+          <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+            <div class="form-group  mb-3">
+              <input class="btn btn-success form-control" type="submit" name="category"
+                value="Travel">
+            </div>
+          </form>
+          <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+            <div class="form-group  mb-3">
+              <input class="btn btn-dark form-control" type="submit" name="category"
+                value="Science">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
