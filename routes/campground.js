@@ -112,12 +112,7 @@ cloudinary.config({
             return res.redirect('back');
         }
     geocoder.geocode(req.body.location, (err, data) => {
-                if(err || !data.length) {
-                    console.log(err);
-                    req.flash('error', 'Invalid address');
-                    return res.redirect('back');
-                    
-                }
+
                 var lat = data[0].latitude;
                 var lng = data[0].longitude;
                 var location = data[0].formattedAddress;
