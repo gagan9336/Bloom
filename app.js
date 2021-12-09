@@ -23,6 +23,7 @@ const PORT = process.env.PORT || 3000;
 mongoose.connect(process.env.MONGODB_URL, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
 
     app.set("view engine", "ejs");
+    app.use(bodyParser.json()); 
     app.use(express.urlencoded({extended:true}));
     app.use(express.static(__dirname+"/public/"));
     app.use(methodOverride("_method"));
