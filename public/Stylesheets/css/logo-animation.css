@@ -1,0 +1,51 @@
+
+img:hover {
+    transform: scale(1.1) !important;
+  }
+  
+  @media (min-width: 992px )  {
+    .card-columns {
+      -webkit-column-count: 3 !important;
+      -moz-column-count: 3 !important;
+      column-count: 3 !important;
+      -webkit-column-gap: 1.25rem !important;
+      -moz-column-gap: 1.25rem !important;
+      column-gap: 1.25rem !important;
+      orphans: 1 !important;
+      widows: 1 !important;
+    }
+  }
+  @media (max-width: 991px) and (min-width: 576px ) {
+    .card-columns {
+      -webkit-column-count: 2 !important;
+      -moz-column-count: 2 !important;
+      column-count: 2 !important;
+      -webkit-column-gap: 1.25rem !important;
+      -moz-column-gap: 1.25rem !important;
+      column-gap: 1.25rem !important;
+      orphans: 1 !important;
+      widows: 1 !important;
+    }
+  }
+  
+  .animated {
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+    animation-delay: 1s;
+  }
+  
+  @keyframes flip {
+    50% {transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);animation-timing-function: ease-in;}
+    80% {transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);animation-timing-function: ease-in;}
+    100% {transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);animation-timing-function: ease-in;}
+  }
+  .animated.flip {
+    backface-visibility: visible;
+    animation-name: flip;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    font-family:monospace ;
+  }
+  
