@@ -46,13 +46,191 @@
     />
 
     <!-- custom css stylesheet -->
-    <link rel="stylesheet" type="text/css" href="loading-animation.css" />
-    <link rel="stylesheet" type="text/css" href="logo-animation.css" />
-    <link rel="stylesheet" type="text/css" href="map.css" />
-  </head>
+    <!-- <link rel="stylesheet" href="loading-animation.css" />
+    <link rel="stylesheet" href="logo-animation.css" />
+    <link rel="stylesheet" href="map.css" /> -->
 
     <!-- custom js -->
-    <script type="text/javascript" src="javascript.js"></script>
+    <!-- <script src="javascript.js"></script> -->
+
+    <!-- Safe side due to error -->
+    <style>
+      .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+      .loader-wrapper {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .loader {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        position: relative;
+        border: 4px solid black;
+        animation: loader 3s infinite ease;
+      }
+      .loader-inner {
+        vertical-align: top;
+        display: inline-block;
+        width: 100%;
+        background-color: grey;
+        animation: loader-inner 2s infinite ease-in;
+      }
+
+      @keyframes loader {
+        0% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(180deg);
+        }
+        50% {
+          transform: rotate(180deg);
+        }
+        75% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes loader-inner {
+        0% {
+          height: 0%;
+        }
+        25% {
+          height: 0%;
+        }
+        50% {
+          height: 100%;
+        }
+        75% {
+          height: 100%;
+        }
+        100% {
+          height: 0%;
+        }
+      }
+      .scoll-pane {
+        width: 100%;
+        height: auto;
+        overflow: auto;
+        outline: none;
+        overflow-y: hidden;
+        padding-bottom: 15px;
+        -ms-overflow-style: scroll;
+        scrollbar-width: none;
+      }
+
+      ul {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .scoll-pane::-webkit-scrollbar {
+        display: none;
+      }
+
+      @media (min-width: 992px) {
+        .card-columns {
+          -webkit-column-count: 3 !important;
+          -moz-column-count: 3 !important;
+          column-count: 3 !important;
+          -webkit-column-gap: 1.25rem !important;
+          -moz-column-gap: 1.25rem !important;
+          column-gap: 1.25rem !important;
+          orphans: 1 !important;
+          widows: 1 !important;
+        }
+      }
+      @media (max-width: 991px) and (min-width: 576px) {
+        .card-columns {
+          -webkit-column-count: 2 !important;
+          -moz-column-count: 2 !important;
+          column-count: 2 !important;
+          -webkit-column-gap: 1.25rem !important;
+          -moz-column-gap: 1.25rem !important;
+          column-gap: 1.25rem !important;
+          orphans: 1 !important;
+          widows: 1 !important;
+        }
+      }
+
+      .animated {
+        animation-duration: 3s;
+        animation-fill-mode: both;
+        animation-iteration-count: 1;
+        animation-delay: 1s;
+      }
+
+      @keyframes flip {
+        50% {
+          transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);
+          animation-timing-function: ease-in;
+        }
+        80% {
+          transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);
+          animation-timing-function: ease-in;
+        }
+        100% {
+          transform: perspective(400px) translateZ(0) rotateY(360deg) scale(1);
+          animation-timing-function: ease-in;
+        }
+      }
+      .animated.flip {
+        backface-visibility: visible;
+        animation-name: flip;
+        font-size: 30px;
+        font-weight: 500;
+        text-align: center;
+        font-family: monospace;
+      }
+      #map {
+        height: 400px;
+        width: 100%;
+        margin-bottom: 10px;
+        border: 1px solid black;
+      }
+    </style>
+    <script>
+      var myArray = ["BLOOM"];
+      var n = 1;
+      setInterval(function () {
+        $(".flip").html(myArray[n]);
+        if (myArray.length - 1 == n) {
+          n = 0;
+        } else {
+          n++;
+        }
+      }, 5000);
+      //Script for diabling button
+      function disableButton() {
+        var btn = document.getElementById("btn");
+        btn.disabled = true;
+        btn.innerText = "Loading...";
+      }
+      function disableButton1() {
+        var btn = document.getElementById("btn1");
+        btn.disabled = true;
+        btn.innerText = "Loading...";
+      }
+    </script>
+  </head>
 
   <body>
     <!-- Nav Bar -->

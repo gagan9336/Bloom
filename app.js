@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URL, { useUnifiedTopology: true, useNewUrlP
     app.set("view engine", "ejs");
     app.use(bodyParser.json()); 
     app.use(express.urlencoded({extended:true}));
-    app.use(express.static("public")); 
+    app.use(express.static(__dirname+"/public/"));
     app.use(methodOverride("_method"));
 
 
@@ -35,7 +35,7 @@ mongoose.connect(process.env.MONGODB_URL, { useUnifiedTopology: true, useNewUrlP
         saveUninitialized:false
     }));
 
-    app.use(flash());
+    app.use(flash()); 
     app.use(passport.initialize());
     app.use(passport.session());
     passport.use(User.createStrategy());
