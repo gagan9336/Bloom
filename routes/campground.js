@@ -226,21 +226,21 @@ router.put("/campGround/:id", middleware.campgroundownership, upload.single('ima
     //delete route
     router.delete("/campGround/:id", middleware.campgroundownership,(req,res)=>{
        Campground.findById(req.params.id, async function(err, campground) {
-    if(err) {
-      req.flash("error", err.message);
-      return res.redirect("back");
-    }
-    try {
-        await cloudinary.v2.uploader.destroy(campground.image_id);
-        campground.remove();
-        res.redirect('/campGround');
-    } catch(err) {
-        if(err) {
-          req.flash("error", err.message);
-          return res.redirect("back");
-        }
-    }
-  });
+            if(err) {
+            req.flash("error", err.message);
+            return res.redirect("back");
+            }
+            try {
+                await cloudinary.v2.uploader.destroy(campground.image_id);
+                campground.remove();
+                res.redirect('/campGround');
+            } catch(err) {
+                if(err) {
+                req.flash("error", err.message);
+                return res.redirect("back");
+                }
+            }
+        });
     });
 
     module.exports=router;

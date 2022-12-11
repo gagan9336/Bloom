@@ -21,12 +21,13 @@ var express    = require("express"),
       res.render("feedback");
     });
 
+    //Feadback form
     router.post("/feedback", (req, res) => {
       var smtpTransport = nodemailer.createTransport({
       service: 'Gmail', 
       auth: {
         user: 'BloomTechTeam@gmail.com',   
-        pass: process.env.GMAILPW
+        pass: 'Gagandeep9336@'
         }
       });
       console.log(req.body.email)
@@ -49,7 +50,7 @@ var express    = require("express"),
         res.render("register", { message: req.flash("error") });
     })
 
-    //signup logic
+    
     //show register form
     router.post("/register", function(req, res){
     var newUser = new User({
@@ -57,6 +58,7 @@ var express    = require("express"),
         email: req.body.email
     });
 
+    //signup logic
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             req.flash("error", "Email or username is invalid");
@@ -68,7 +70,7 @@ var express    = require("express"),
       service: 'Gmail', 
       auth: {
         user: 'BloomTechTeam@gmail.com',   
-        pass: process.env.GMAILPW
+        pass: 'Gagandeep9336@'
         }
       });
       var mailOptions = {
@@ -140,7 +142,7 @@ router.post('/forgot', function(req, res, next) {
         service: 'Gmail', 
         auth: {
           user: 'BloomTechTeam@gmail.com',   
-          pass: process.env.GMAILPW
+          pass: 'Gagandeep9336@'
         }
       });
       var mailOptions = {
@@ -149,7 +151,7 @@ router.post('/forgot', function(req, res, next) {
         subject: 'Bloomera Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'https://' + req.headers.host + '/reset/' + token + '\n\n' +
+          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
@@ -204,7 +206,7 @@ router.post('/reset/:token', function(req, res) {
         service: 'Gmail', 
         auth: {
           user: 'bloomtechteam@gmail.com',
-          pass: process.env.GMAILPW
+          pass: 'Gagandeep9336@'
         }
       });
       var mailOptions = {
